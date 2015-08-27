@@ -1,0 +1,22 @@
+message-torch-slack
+===================
+Slack integration to make a message torch light up whenever something is posted to a Slack channel.
+
+At work, we have a Slack channel that receives updates from GitLab and Trello via webhooks/postbacks.
+Any time that channel receives data, it sends a web request to a small PHP script that causes the
+message torch to flare up!
+
+
+firmware
+--------
+This is the firmware to flash on your Photon / Spark Core that powers your message torch.  I deviated
+from the original firmware by replacing the "function router" (`int fnRouter(...) {...}`) with my own.
+This is not necessary and could be easily adapted to using the original firmware.  I used [@peekay123's
+fork](https://github.com/pkourany/MessageTorchPK) of the firmware to base my work off of.
+
+
+web
+---
+This contains the tiny PHP script (powered by the phpSpark library) that Slack pings when something
+is updated in a selected channel.  In Slack, you'll want to configure an "outgoing webhook" to point
+to wherever you host the PHP file(s).
